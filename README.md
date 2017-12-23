@@ -7,17 +7,19 @@ tool available at https://github.com/fpl/scihub
 
 The hierarchy used is:
 
-	Satellite
- 	   |
-	   ---> Product
-	           |
-			   ---> Orbit direction
-			              |
-						  ---> Relative Orbit #
-			              			|
-						  			---> Year
-						        		  |
-										  ---> Month
+       Satellite
+       |
+       +---> Product
+            |
+            +---> Orbit direction
+                  |
+                  +---> Relative Orbit #
+                        |
+                        +---> Year
+                              |
+                              +---> Month
+							        |
+									+---> KML layer
 
 
 Each layer keep the full ESA file name and is added to
