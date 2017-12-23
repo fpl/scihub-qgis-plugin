@@ -223,6 +223,7 @@ class OrgSciHubKML:
             if not len(filelist) and not len(folder):
                 self.err_msg("Please set a list of KML files and/or a repository folder!")
             else:
+                self.dlg.close()
                 if len(folder) and not os.path.isdir(folder):
                     self.err_msg("Repository folder is not a directory")
                     return
@@ -245,9 +246,6 @@ class OrgSciHubKML:
                     for name in glob.glob(os.path.join(folder,'*.kml')):
                         kmls.append(name)
 
-                for k in kmls:
-                    print k
-
                 groups = {}
                 root = QgsProject.instance().layerTreeRoot()
                 ogr.UseExceptions()
@@ -260,14 +258,22 @@ class OrgSciHubKML:
                 progress.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
                 progressMessageBar.layout().addWidget(progress)
                 self.iface.messageBar().pushWidget(progressMessageBar, self.iface.messageBar().INFO)
+
+                main_name = 'SciHub Layers'
+                if not root.findGroup(main_name):
+                    main = root.addGroup(main_name)
+                else:
+                    main = root.findGroup(main_name)
+
+                kmls.sort()
                 i = 0
                 for kml in kmls:
                     (s, p, d, r, y, m, n) = self.get_info(kml)
 
-                    if not root.findGroup(s):
-                        sensor = root.addGroup(s)
+                    if not main.findGroup(s):
+                        sensor = main.addGroup(s)
                     else:
-                        sensor = root.findGroup(s)
+                        sensor = main.findGroup(s)
 
                     if not sensor.findGroup(p):
                         product = sensor.addGroup(p)
@@ -298,11 +304,12 @@ class OrgSciHubKML:
                     else:
                         month = year.findGroup(m_str)
 
-                    frame = QgsVectorLayer(kml, n, 'ogr') 
-                    QgsMapLayerRegistry.instance().addMapLayer(frame, False)
-                    month.addLayer(frame)
+                    if not QgsMapLayerRegistry.instance().mapLayersByName(n):
+                        frame = QgsVectorLayer(kml, n, 'ogr') 
+                        QgsMapLayerRegistry.instance().addMapLayer(frame, False)
+                        month.addLayer(frame)
+
                     i += 1
                     progress.setValue(i)
-
 
                 self.iface.messageBar().clearWidgets()

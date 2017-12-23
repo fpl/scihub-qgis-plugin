@@ -8,16 +8,16 @@
 
 [general]
 name=Org SciHub KML
-qgisMinimumVersion=2.0
-description=Organize SciHub KML in groups
+qgisMinimumVersion=2.18.1
+description=Organizing SciHub KMLs in groups
 version=0.1
 author=Francesco Paolo Lovergine
 email=francesco.lovergine@cnr.it
 
-about=This plugin organizes in groups hierarchy a series of KML files as produced by The Copernicus SciHub Downloader, to facilitate viewing of long list of Sentinel images by Satellite, orbit direction, relative orbit number, year and month of acquisition. See https://github.com/fpl/scihub for information about the Copernicus SciHub Downloader tool.
+about=This plugin organizes in a groups hierarchy a series of KML files, as created by The Copernicus SciHub Downloader, in order to facilitate viewing of long lists of Sentinel images by Satellites, orbit directions, relative orbit numbers, years and months of acquisition. See https://github.com/fpl/scihub for information about the Copernicus SciHub Downloader tool.
 
-tracker=https://github.com/fpl/scihub/issues
-repository=https://github.com/fpl/scihub
+tracker=https://github.com/fpl/scihub-qgis-plugin/issues
+repository=https://github.com/fpl/scihub-qgis-plugin
 # End of mandatory metadata
 
 # Recommended items:
