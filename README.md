@@ -18,8 +18,8 @@ The hierarchy used is:
                         +---> Year
                               |
                               +---> Month
-							        |
-									+---> KML layer
+                                    |
+                                    +---> KML layer
 
 
 Each layer keep the full ESA file name and is added to
